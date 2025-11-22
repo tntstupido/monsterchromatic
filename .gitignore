@@ -20,3 +20,6 @@ BUILD/
 
 # Android build folder
 /android/
+
+# Security
+*.keystore
