@@ -21,6 +21,13 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
     - SFX za oružja, udarce, UI.
     - Pozadinska muzika.
 
+## Balansiranje i Poliranje
+- [ ] **Balansiranje Težine**:
+    - Podesiti HP neprijatelja, damage oružja, i spawn rate kroz talase.
+    - Kriva težine (difficulty curve).
+- [ ] **Ekonomija Igre**:
+    - Ako se uvede valuta/shop, balansirati cene i zaradu.
+
 ## Ideje (Backlog)
 - Power-ups (štit, brzina, health potion).
 - Shop sistem (kupovina oružja/upgrade-a).
