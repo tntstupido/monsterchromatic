@@ -5,9 +5,11 @@ extends "res://scenes/weapon/Weapon.gd"
 
 @onready var _hitbox: Area2D = $Hitbox
 @onready var _sprite: Sprite2D = $Sprite2D
-@onready var _anim_player: AnimationPlayer = $AnimationPlayer
+var _anim_player: AnimationPlayer
 
 func _ready() -> void:
+	_anim_player = get_node_or_null("AnimationPlayer")
+	
 	if _hitbox:
 		_hitbox.monitoring = false
 		_hitbox.body_entered.connect(_on_body_entered)

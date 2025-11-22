@@ -9,7 +9,7 @@ signal died
 @export var max_health: float = 100.0
 
 # Weapon System
-@export var starting_weapon_scene: PackedScene = preload("res://scenes/weapon/Axe.tscn")
+@export var starting_weapon_scene: PackedScene = preload("res://scenes/weapon/Hammer.tscn")
 const WeaponScript = preload("res://scenes/weapon/Weapon.gd")
 var current_weapon: Node # Typed as Node or WeaponScript if possible, but Node is safe with casting
 

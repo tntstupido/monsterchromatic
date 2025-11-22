@@ -3,7 +3,7 @@
 Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
 
 ## Prioritetno (Sledeće)
-- [ ] **Testiranje Čekića (Hammer)**:
+- [x] **Testiranje Čekića (Hammer)**:
     - Postaviti kao početno oružje.
     - Proveriti hitbox i animaciju (spin attack).
     - Podesiti parametre (damage, cooldown).
