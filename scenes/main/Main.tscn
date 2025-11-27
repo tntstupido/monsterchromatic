@@ -85,6 +85,7 @@ unique_name_in_owner = true
 [node name="FloorTiles" type="Node" parent="World"]
 
 [node name="WallsTileMapLayer" type="TileMapLayer" parent="World/FloorTiles"]
+modulate = Color(0, 0.62433267, 0.6243325, 1)
 tile_map_data = PackedByteArray("AAD+/wAAAAAAAAEAAAABAAAAAAAAAAEAABA=")
 tile_set = SubResource("TileSet_3km4f")
 

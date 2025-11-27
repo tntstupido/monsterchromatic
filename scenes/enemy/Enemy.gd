@@ -4,7 +4,7 @@ signal died(enemy)
 
 @export var move_speed: float = 140.0
 @export var acceleration: float = 600.0
-@export var max_health: float = 25.0
+@export var max_health: float = 30.0
 @export var contact_damage: float = 10.0
 @export var contact_cooldown: float = 0.7
 

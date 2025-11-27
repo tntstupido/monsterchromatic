@@ -10,7 +10,7 @@ projectile_speed = 500.0
 spread_degrees = 0.0
 projectile_scene = ExtResource("3")
 hide_visual_while_flying = true
-damage = 25.0
+damage = 15.0
 cooldown = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

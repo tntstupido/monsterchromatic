@@ -13,8 +13,9 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
 ## Planirane Funkcionalnosti
 - [ ] **Sistem Promene Oružja**:
     - UI za izbor oružja ili drop-ovi u toku igre.
-- [ ] **Novi Neprijatelji**:
-    - Različiti tipovi kretanja i napada.
+- [x] **Novi Neprijatelji**:
+    - [x] Osnovni neprijatelj (Worm) sa teksturom i kolizijom.
+    - [ ] Različiti tipovi kretanja i napada.
 - [ ] **Sistem Talasa (Waves)**:
     - Naprednija logika za spawn-ovanje neprijatelja.
 - [ ] **Zvuk i Muzika**:
@@ -22,9 +23,11 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
     - Pozadinska muzika.
 
 ## Balansiranje i Poliranje
-- [ ] **Balansiranje Težine**:
-    - Podesiti HP neprijatelja, damage oružja, i spawn rate kroz talase.
-    - Kriva težine (difficulty curve).
+- [x] **Balansiranje Težine**:
+    - [x] Podešen HP neprijatelja (30), damage oružja (10/15/40), i spawn rate (2.0→0.4).
+    - [ ] Finalizacija krive težine kroz testiranje.
+- [ ] **Poliranje Animacija Oružja**:
+    - [ ] Podešavanje Hammer impact animacije (shake i scale efekti).
 - [ ] **Ekonomija Igre**:
     - Ako se uvede valuta/shop, balansirati cene i zaradu.
 

@@ -3,10 +3,10 @@ extends Node
 signal enemy_spawned(enemy)
 
 @export var enemy_scene: PackedScene
-@export var spawn_interval: float = 1.4
+@export var spawn_interval: float = 2.0
 @export var spawn_interval_min: float = 0.4
 @export var spawn_radius: float = 520.0
-@export var difficulty_ramp: float = 0.985
+@export var difficulty_ramp: float = 0.98
 
 var player: Node2D
 var spawn_root: Node
