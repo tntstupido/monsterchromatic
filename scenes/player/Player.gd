@@ -8,8 +8,11 @@ signal died
 @export var friction: float = 1800.0
 @export var max_health: float = 100.0
 
+var speed_multiplier: float = 1.0
+
 # Weapon System
 @export var starting_weapon_scene: PackedScene = preload("res://scenes/weapon/Hammer.tscn")
+
 const WeaponScript = preload("res://scenes/weapon/Weapon.gd")
 var current_weapon: Node # Typed as Node or WeaponScript if possible, but Node is safe with casting
 
@@ -37,13 +40,34 @@ func _ready() -> void:
 	
 	if starting_weapon_scene:
 		equip_weapon(starting_weapon_scene)
+		
+	_setup_magnet()
+
+func _setup_magnet() -> void:
+	var magnet_area = Area2D.new()
+	magnet_area.name = "MagnetArea"
+	magnet_area.collision_layer = 0
+	magnet_area.collision_mask = 8 # Layer 4 usually, but we set Gem to layer 4 (value 8)
+	add_child(magnet_area)
+	
+	var shape = CollisionShape2D.new()
+	var circle = CircleShape2D.new()
+	circle.radius = 150.0 # Magnet radius
+	shape.shape = circle
+	magnet_area.add_child(shape)
+	
+	magnet_area.area_entered.connect(_on_magnet_area_entered)
+
+func _on_magnet_area_entered(area: Area2D) -> void:
+	if area.has_method("collect"):
+		area.collect(self)
 
 
 func _physics_process(delta: float) -> void:
 	var input_dir := _get_move_vector()
 
 	if input_dir != Vector2.ZERO:
-		velocity = velocity.move_toward(input_dir * move_speed, acceleration * delta)
+		velocity = velocity.move_toward(input_dir * (move_speed * speed_multiplier), acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 

@@ -4,9 +4,23 @@ extends CanvasLayer
 @onready var timer_label: Label = %TimerLabel
 @onready var wave_label: Label = %WaveLabel
 
-func _ready() -> void:
-	pass
+@onready var xp_bar: ProgressBar = %XPBar
+@onready var level_label: Label = %LevelLabel
 
+func _ready() -> void:
+	if ExperienceManager:
+		ExperienceManager.experience_gained.connect(update_xp)
+		ExperienceManager.level_up.connect(update_level)
+		# Initialize
+		update_xp(ExperienceManager.current_experience, ExperienceManager.target_experience)
+		update_level(ExperienceManager.current_level)
+
+func update_xp(current: int, target: int) -> void:
+	xp_bar.max_value = target
+	xp_bar.value = current
+
+func update_level(new_level: int) -> void:
+	level_label.text = "LVL %d" % new_level
 
 func update_health(current: float, maximum: float) -> void:
 	health_bar.max_value = maximum

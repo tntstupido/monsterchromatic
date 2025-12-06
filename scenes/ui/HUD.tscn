@@ -32,6 +32,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "00:00"
 
+[node name="LevelLabel" type="Label" parent="Root/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "LVL 1"
+
 [node name="HealthBar" type="ProgressBar" parent="Root"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -40,6 +45,15 @@ offset_top = 64.0
 offset_right = 316.0
 offset_bottom = 96.0
 value = 100.0
+
+[node name="XPBar" type="ProgressBar" parent="Root"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+show_percentage = false
 
 [node name="HealthText" type="Label" parent="Root/HealthBar"]
 unique_name_in_owner = true

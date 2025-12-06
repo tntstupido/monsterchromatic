@@ -22,11 +22,29 @@ var wave: int = 1
 
 
 func _ready() -> void:
+	if ExperienceManager:
+		ExperienceManager.level_up.connect(_on_level_up)
+		
 	_setup_pool()
 	_setup_player()
 	_setup_spawner()
+	_setup_wave_manager()
 	hud.update_wave(wave)
 	hud.update_time(elapsed)
+
+func _setup_wave_manager() -> void:
+	var wm_scene = preload("res://scenes/spawner/WaveManager.tscn")
+	var wm = wm_scene.instantiate()
+	add_child(wm)
+	wm.spawner = spawner
+	
+	# Load waves
+	var w1 = load("res://scenes/levels/wave_1.tres")
+	var w2 = load("res://scenes/levels/wave_2.tres")
+	var boss = load("res://scenes/levels/wave_boss.tres")
+	
+	var wave_list: Array[Resource] = [w1, w2, boss]
+	wm.waves = wave_list
 
 
 func _process(delta: float) -> void:
@@ -71,7 +89,7 @@ func _setup_player() -> void:
 
 
 func _setup_spawner() -> void:
-	spawner.enemy_scene = enemy_scene
+	# spawner.enemy_scene = enemy_scene # Deprecated: Managed by WaveManager
 	spawner.spawn_root = enemies
 	spawner.player = player
 	spawner.enemy_spawned.connect(_on_enemy_spawned)
@@ -89,6 +107,17 @@ func _on_enemy_died(enemy: Node) -> void:
 
 func _on_player_health_changed(current: float, maximum: float) -> void:
 	hud.update_health(current, maximum)
+
+
+func _on_level_up(new_level: int) -> void:
+	# Ignore level 1 (start)
+	if new_level <= 1:
+		return
+		
+	var screen_scene = load("res://scenes/ui/LevelUpScreen.tscn")
+	if screen_scene:
+		var screen = screen_scene.instantiate()
+		add_child(screen)
 
 
 func _on_player_died() -> void:

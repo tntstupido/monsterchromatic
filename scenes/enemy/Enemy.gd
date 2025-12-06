@@ -18,12 +18,24 @@ func _ready() -> void:
 	add_to_group("enemy")
 
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 func _physics_process(delta: float) -> void:
 	if target:
 		var dir := (target.global_position - global_position).normalized()
 		velocity = velocity.move_toward(dir * move_speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, acceleration * delta)
+
+	# Flip sprite based on movement direction
+	# Asset faces LEFT. 
+	# Moving RIGHT (vel.x > 0) -> Flip (Scale.x = -1 or flip_h = true)
+	# Moving LEFT (vel.x < 0) -> Normal (Scale.x = 1 or flip_h = false)
+	if velocity.x > 0.1:
+		sprite.flip_h = true
+	elif velocity.x < -0.1:
+		sprite.flip_h = false
+
 
 	_contact_timer = max(0.0, _contact_timer - delta)
 	var collision := move_and_collide(velocity * delta)
@@ -47,5 +59,11 @@ func _hit_player(player: Node) -> void:
 
 
 func _die() -> void:
+	var gem_scene = preload("res://scenes/objects/Gem.tscn")
+	var gem = gem_scene.instantiate()
+	gem.global_position = global_position
+	# Defer adding to ensure thread safety/physics state safety during callback
+	get_parent().call_deferred("add_child", gem)
+	
 	died.emit(self)
 	queue_free()

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaveDefinition" load_steps=5 format=3 uid="uid://wave_boss"]
+
+[ext_resource type="Script" path="res://scenes/resources/WaveDefinition.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://enemy" path="res://scenes/enemy/Enemy.tscn" id="2_enemy"]
+[ext_resource type="PackedScene" uid="uid://fast_enemy" path="res://scenes/enemy/FastEnemy.tscn" id="3_fast"]
+[ext_resource type="PackedScene" uid="uid://boss_enemy" path="res://scenes/enemy/BossEnemy.tscn" id="4_boss"]
+
+[resource]
+script = ExtResource("1_script")
+start_time = 120
+end_time = -1
+spawn_interval = 0.5
+enemies = Array[PackedScene]([ExtResource("2_enemy"), ExtResource("3_fast")])
+boss_scene = ExtResource("4_boss")

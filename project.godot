@@ -18,12 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 InputManager="*res://autoload/InputManager.gd"
+ExperienceManager="*res://scenes/autoload/ExperienceManager.gd"
+UpgradeManager="*res://scenes/autoload/UpgradeManager.gd"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/size/window_width_override=540
+window/size/window_height_override=960
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [dotnet]
