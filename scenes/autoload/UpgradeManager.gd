@@ -9,18 +9,18 @@ func _init_pool() -> void:
 	# Temporary: Create some dummy upgrades for testing
 	var u1 = Upgrade.new()
 	u1.id = "heal"
-	u1.title = "Full Heal"
-	u1.description = "Restore 100% Health"
+	u1.title = "Denial of Death"
+	u1.description = "Restore Health (Ignore the inevitable)"
 	
 	var u2 = Upgrade.new()
 	u2.id = "speed"
-	u2.title = "Speed Up"
-	u2.description = "Increase Movement Speed by 10%"
+	u2.title = "Panic Sprints"
+	u2.description = "Speed Up (Run from your problems)"
 	
 	var u3 = Upgrade.new()
 	u3.id = "damage"
-	u3.title = "Might"
-	u3.description = "Increase Damage by 10%"
+	u3.title = "Hate"
+	u3.description = "Increase Damage (Pure spite)"
 	
 	_upgrade_pool.append(u1)
 	_upgrade_pool.append(u2)

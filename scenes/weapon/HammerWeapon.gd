@@ -6,6 +6,7 @@ extends "res://scenes/weapon/MeleeWeapon.gd"
 @export var fixed_starting_rotation: float = 0.0 # Fixed rotation in radians (0 = right)
 @export var hit_pause_duration: float = 0.08 # Duration of hitstop on impact
 
+@onready var _sprite: Sprite2D = $Sprite2D
 var _time: float = 0.0
 var _base_sprite_offset: Vector2
 var _base_hitbox_offset: Vector2
@@ -26,6 +27,7 @@ func _ready() -> void:
 				break
 
 func _perform_attack(_direction: Vector2) -> void:
+	_hit_this_swing.clear()
 	# Always spin from fixed starting position, ignore direction
 	if _hitbox:
 		_hitbox.monitoring = true
@@ -33,7 +35,7 @@ func _perform_attack(_direction: Vector2) -> void:
 		# Spin 360 degrees and return to starting position
 		_current_tween.tween_property(self, "rotation", fixed_starting_rotation + TAU, swing_duration)
 		_current_tween.tween_callback(func():
-			_hitbox.monitoring = false
+			_on_attack_finished()
 			rotation = fixed_starting_rotation # Reset to starting rotation
 			_current_tween = null
 		)

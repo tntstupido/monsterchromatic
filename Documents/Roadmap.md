@@ -11,6 +11,12 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
     - [x] Movement & shooting (Basic)
     - [x] Enemy spawning/AI (Basic)
     - [x] Progression System (XP, Level Up, Waves)
+- [x] **Atmospheric & Narrative Identity**
+    - [x] Define "Sarcastic Horror" core experience.
+    - [x] Implement "Wobble" procedural animation for characters.
+    - [x] Create the Art & Style Guide ([ArtGuide.md](file:///home/mladen/Unreal/Godot/Projects/MonsterChromatic/Documents/ArtGuide.md)).
+    - [x] Implement Sarcastic Speech Bubble system.
+    - [x] **Vizuelni Efekti (VFX)**: Dodata prašina (dust particles) pri kretanju.
 
 ## Planirane Funkcionalnosti (Backlog)
 
@@ -51,13 +57,27 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
 
 ### Faza 3: Polish & Meta
 - [ ] **Main Menu Shop**: Kupovina trajnih statova (Meta-progression).
-- [ ] **Sound & Music**: Dodavanje SFX i pozadinske muzike.
+- [ ] **Sound & Music**:
+    - [x] Implementiran globalni `AudioManager` sistem (sa pitch randomization).
+    - [ ] Dodati "slapstick" zvučne efekte (squish, wobble, impact).
+    - [ ] Dodati mračne ambijentalne tonove.
+    - [ ] Integrisati komične krike neprijatelja pri smrti.
 - [ ] **Settings Meni**: Zvuk, kontrole.
+
+### Faza 2.5: Environment & Atmosphere (Groblje)
+- [/] **Unapređenje Okruženja**:
+    - [x] Implementiran sistem Y-sortiranih interaktivnih propova.
+    - [x] Dodata Scary Tree varijanta (Smanjen broj na sceni radi preglednosti).
+    - [ ] **Podloga (Floor)**: Kreirati "shaky" hand-painted tileset za zemlju (Veličina tile-ova: 256x256).
+    - [ ] **Propovi**: Dodati Headstones i ostale grobljanske detalje koristeći postojeće/nove asete.
 
 ## Balansiranje i Poliranje
 - [x] **Balansiranje Težine**:
     - [x] Podešen HP neprijatelja (30), damage oružja (10/15/40), i spawn rate (2.0→0.4).
     - [ ] Finalizacija krive težine kroz testiranje.
+- [ ] **Proširenje Dijaloškog Sistema**:
+    - [ ] Dodati još sarkastičnih komentara (različiti za različite tipove neprijatelja).
+    - [ ] Revidirati trigere (vremenska ograničenja, specifične situacije poput Boss borbi).
 - [x] **Poliranje Animacija Oružja**:
     - [x] Podešavanje Hammer impact animacije (shake i scale efekti).
 - [ ] **Ekonomija Igre**:

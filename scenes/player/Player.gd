@@ -18,6 +18,8 @@ var current_weapon: Node # Typed as Node or WeaponScript if possible, but Node i
 
 @export var bounce_speed: float = 12.0
 @export var bounce_amount: float = 0.12
+@export var tilt_amount: float = 0.15 # Max tilt in radians
+@export var tilt_speed: float = 12.0
 
 var main: Node
 var _health: float
@@ -25,11 +27,13 @@ var _rng := RandomNumberGenerator.new()
 var _aim_direction := Vector2.RIGHT
 var _bounce_phase: float = 0.0
 var _facing_sign: float = 1.0
+var _last_wave: float = 0.0
+
+@export var dust_scene: PackedScene = preload("res://scenes/vfx/DustParticles.tscn")
 
 @onready var _input_manager: Node = get_node_or_null("/root/InputManager")
 @onready var _muzzle: Marker2D = %Muzzle
 @onready var _visual: Node2D = get_node_or_null("%Visual")
-@onready var _sprite: Sprite2D = get_node_or_null("%Visual/Sprite2D")
 
 
 func _ready() -> void:
@@ -72,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 
 	_update_facing(input_dir)
-	_update_bounce(input_dir, delta)
+	_update_wobble(input_dir, delta)
 	move_and_slide()
 
 
@@ -133,21 +137,41 @@ func _update_facing(input_dir: Vector2) -> void:
 		_facing_sign = 1.0
 
 
-func _update_bounce(input_dir: Vector2, delta: float) -> void:
+func _update_wobble(input_dir: Vector2, delta: float) -> void:
 	if _visual == null:
 		return
 
 	if input_dir == Vector2.ZERO:
 		_bounce_phase = 0.0
-		_visual.position.y = 0.0
-		_visual.scale = Vector2(_facing_sign, 1.0)
+		_visual.position.y = lerp(_visual.position.y, 0.0, 10.0 * delta)
+		_visual.scale = _visual.scale.lerp(Vector2(_facing_sign, 1.0), 10.0 * delta)
+		_visual.rotation = lerp(_visual.rotation, 0.0, 10.0 * delta)
 		return
 
 	_bounce_phase += delta * bounce_speed
 	var wave := sin(_bounce_phase)
 	var squash := wave * bounce_amount
-	# Stretch in Y, squash in X for cartoony feel.
+	
+	# Squash & Stretch
 	var scale_x := _facing_sign * (1.0 - (squash * 0.5))
 	var scale_y := 1.0 + squash
 	_visual.scale = Vector2(scale_x, scale_y)
-	# _visual.position.y = wave * 3.0 # Removed to keep feet planted
+	
+	# Tilt (The Waddle)
+	# We tilt based on the sine wave to create a side-to-side waddle effect
+	var tilt := wave * tilt_amount
+	_visual.rotation = tilt
+	
+	# Slight vertical bounce
+	_visual.position.y = - abs(wave) * 2.0
+	
+	# Spawn dust when hitting the ground
+	if sign(wave) != sign(_last_wave) and abs(wave) < 0.2:
+		_spawn_dust()
+	_last_wave = wave
+
+func _spawn_dust() -> void:
+	if not dust_scene: return
+	var dust = dust_scene.instantiate()
+	get_parent().add_child(dust)
+	dust.global_position = global_position + Vector2(0, 10)

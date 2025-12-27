@@ -1,6 +1,11 @@
 # Dokument Dizajna Igre (Game Design Document) - MonsterChromatic
 
-Ovaj dokument služi za definisanje mehanika progresije, sistema neprijatelja i sposobnosti.
+Ovaj dokument služi za definisanje mehanika progresije, sistema neprijatelja i sposobnosti, ali i **srži iskustva** (The Fantasy).
+
+## 0. Srž Iskustva (The Core Fantasy)
+*   **"Cinični Preživeli"**: Igrač nije heroj, već neko ko pokušava da preživi u svetu koji je istovremeno mračan, opasan i apsurdno smešan.
+*   **Atmosfera**: Spoj mraka i boja (Chromatic). Svet treba da izgleda kao bizaran, mračan crtani film (inspiracija: *Don't Starve*, *Bad North*).
+*   **Narativni Ton**: **Mračni Sarkazam**. Oružja, upgrade-ovi i neprijatelji imaju opise koji ismevaju igračevu šansu za preživljavanje. (Primer: Hammer - "Služi za razbijanje glava, ali tvoja je verovatno sledeća.")
 
 ## 1. Struktura Igranja (Game Loop)
 Predlog je **"Roguelite Survival"** model (sličan Vampire Survivors / Brotato), gde igrač preživljava talase neprijatelja, sakuplja XP, jača tokom partije (Run), i na kraju gine/pobeđuje zadržavajući valutu za trajna pojačanja.
@@ -42,7 +47,13 @@ U glavnom meniju ("The Lair"), igrač troši sakupljeno zlato na trajna pojačan
 *   **Unlocks**: Otključavanje novih karaktera ili oružja da se pojave u budućim partijama.
 *   **Reroll**: Mogućnost promene ponuđenih upgrade-ova tokom Level Up-a.
 
-## 4. Specifikacije za Mobilnu Platformu (Android/iOS)
+## 4. Vizuelni i Zvučni Identitet (The Atmosphere)
+Cilj je stvoriti "Mračni svet sa dušom".
+*   **Kontrast i Raznolikost**: Umesto neon boja, fokus je na **raznolikosti stilova i boja** samih bića (zemljani tonovi, prljavo bele, tamne senke) u kontrastu sa mračnom pozadinom. "Chromatic" predstavlja širok spektar bizarnih stvorenja.
+*   **"Wobble" Horor**: Likovi su jednostavnih oblika (bean/blob) sa teksturom koja podseća na postojeće asete - ručno crtano, sa vidljivim potezima četkice i jakim crnim konturama.
+*   **Zvuci**: Kombinacija ambijentalnog horora (vetar, krici u daljini) i "slapstick" zvučnih efekata (smešni zvuci udara, apsurdni krici neprijatelja).
+
+## 5. Specifikacije za Mobilnu Platformu (Android/iOS)
 S obzirom da je platforma mobilna, sesije treba da budu kraće i intenzivnije ("Pick-up-and-play").
 
 *   **Trajanje Partije (Session Length)**: **10 - 15 minuta**.

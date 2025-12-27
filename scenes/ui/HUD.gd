@@ -20,7 +20,7 @@ func update_xp(current: int, target: int) -> void:
 	xp_bar.value = current
 
 func update_level(new_level: int) -> void:
-	level_label.text = "LVL %d" % new_level
+	level_label.text = "Regret %d" % new_level
 
 func update_health(current: float, maximum: float) -> void:
 	health_bar.max_value = maximum
@@ -29,11 +29,11 @@ func update_health(current: float, maximum: float) -> void:
 
 
 func update_wave(value: int) -> void:
-	wave_label.text = "Wave %d" % value
+	wave_label.text = "Suffering Cycle %d" % value
 
 
 func update_time(seconds: float) -> void:
 	var total_seconds: int = int(seconds)
-	var minutes: int = int(total_seconds / 60)
+	var minutes: int = total_seconds / 60
 	var secs: int = total_seconds % 60
 	timer_label.text = "%02d:%02d" % [minutes, secs]

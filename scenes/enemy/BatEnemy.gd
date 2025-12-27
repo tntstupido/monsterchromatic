@@ -30,11 +30,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, acceleration * delta)
 
-	# Flip sprite logic (Manually added since we override _physics_process)
-	if velocity.x > 0.1:
-		sprite.flip_h = true
-	elif velocity.x < -0.1:
-		sprite.flip_h = false
+	# Update facing and wobble
+	_update_facing()
+	_update_wobble(delta)
 
 
 	# Collision Logic (Copied from Enemy.gd because we overrode _physics_process)
