@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://axe"]
 
 [ext_resource type="Script" path="res://scenes/weapon/RangedWeapon.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://6kb17k6g42" path="res://icon.svg" id="2"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2"]
 [ext_resource type="PackedScene" uid="uid://axe_projectile" path="res://scenes/projectile/AxeProjectile.tscn" id="3"]
 
 [node name="Axe" type="Node2D"]
@@ -12,6 +12,7 @@ projectile_scene = ExtResource("3")
 hide_visual_while_flying = true
 damage = 15.0
 cooldown = 0.8
+weapon_name = "Axe"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 0)

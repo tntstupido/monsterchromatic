@@ -12,6 +12,7 @@ swing_duration = 0.5
 swing_angle = 360.0
 damage = 40.0
 cooldown = 1.2
+weapon_name = "Hammer"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3.8146973e-06, -51.999996)

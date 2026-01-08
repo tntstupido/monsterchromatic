@@ -12,9 +12,8 @@ var speed_multiplier: float = 1.0
 
 # Weapon System
 @export var starting_weapon_scene: PackedScene = preload("res://scenes/weapon/Hammer.tscn")
-
 const WeaponScript = preload("res://scenes/weapon/Weapon.gd")
-var current_weapon: Node # Typed as Node or WeaponScript if possible, but Node is safe with casting
+var weapons: Array[Node] = []
 
 @export var bounce_speed: float = 12.0
 @export var bounce_amount: float = 0.12
@@ -28,6 +27,7 @@ var _aim_direction := Vector2.RIGHT
 var _bounce_phase: float = 0.0
 var _facing_sign: float = 1.0
 var _last_wave: float = 0.0
+var _can_spawn_dust: bool = false
 
 @export var dust_scene: PackedScene = preload("res://scenes/vfx/DustParticles.tscn")
 
@@ -43,9 +43,16 @@ func _ready() -> void:
 	emit_signal("health_changed", _health, max_health)
 	
 	if starting_weapon_scene:
-		equip_weapon(starting_weapon_scene)
+		add_weapon(starting_weapon_scene)
 		
 	_setup_magnet()
+	
+	# Initialize to prevent immediate dust spawn
+	_last_wave = 1.0
+	
+	# Delay dust spawning to prevent spawn point residue
+	await get_tree().create_timer(0.5).timeout
+	_can_spawn_dust = true
 
 func _setup_magnet() -> void:
 	var magnet_area = Area2D.new()
@@ -83,24 +90,31 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	_aim_direction = _get_aim_direction()
 
-	if _aim_direction != Vector2.ZERO and current_weapon:
-		current_weapon.attack(_aim_direction)
+	if _aim_direction != Vector2.ZERO:
+		for weapon in weapons:
+			if weapon.has_method("attack"):
+				weapon.attack(_aim_direction)
 
 
-func equip_weapon(weapon_scene: PackedScene) -> void:
-	if current_weapon:
-		current_weapon.queue_free()
-		
+func add_weapon(weapon_scene: PackedScene) -> void:
 	var new_weapon = weapon_scene.instantiate()
-	if new_weapon is WeaponScript:
-		current_weapon = new_weapon
+	if new_weapon is WeaponScript or new_weapon.has_method("attack"):
+		weapons.append(new_weapon)
 		if _muzzle:
-			_muzzle.add_child(current_weapon)
+			_muzzle.add_child(new_weapon)
 		else:
-			add_child(current_weapon)
+			add_child(new_weapon)
 	else:
 		push_error("Equipped scene is not a Weapon")
 		new_weapon.queue_free()
+
+func get_weapon_by_name(w_name: String) -> Node:
+	for w in weapons:
+		if "weapon_name" in w and w.weapon_name == w_name:
+			return w
+		if w.name == w_name:
+			return w
+	return null
 
 
 func _get_aim_direction() -> Vector2:
@@ -171,7 +185,9 @@ func _update_wobble(input_dir: Vector2, delta: float) -> void:
 	_last_wave = wave
 
 func _spawn_dust() -> void:
-	if not dust_scene: return
+	if not dust_scene or not _can_spawn_dust: return
 	var dust = dust_scene.instantiate()
+	var spawn_pos = global_position + Vector2(0, 10)
+	print("[PLAYER] Spawning dust at: ", spawn_pos, " | Player at: ", global_position)
 	get_parent().add_child(dust)
-	dust.global_position = global_position + Vector2(0, 10)
+	dust.global_position = spawn_pos

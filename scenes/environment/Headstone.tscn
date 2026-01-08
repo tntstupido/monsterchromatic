@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://headstone"]
+[gd_scene load_steps=4 format=3 uid="uid://headstone"]
 
 [ext_resource type="PackedScene" uid="uid://prop" path="res://scenes/environment/Prop.tscn" id="1"]
-[ext_resource type="Texture2D" uid="uid://b8cuisxx3uvlp" path="res://assets/environment/raw/wall_tileset_raw.png" id="2"]
+[ext_resource type="Script" path="res://scenes/environment/Headstone.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://l7hnhmxaksi7" path="res://assets/environment/raw/headstones_tiles_1.png" id="3"]
 
 [node name="Headstone" instance=ExtResource("1")]
+script = ExtResource("2")
 wobble_intensity = 5.0
 wobble_duration = 0.3
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2")
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2(256, 0, 256, 256) # Guessing a stone-like block
+region_rect = Rect2(0, 0, 256, 256)
 offset = Vector2(0, -100)
 
 [node name="CollisionShape2D" parent="." index="1"]

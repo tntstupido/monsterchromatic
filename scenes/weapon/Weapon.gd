@@ -3,9 +3,17 @@ extends Node2D
 
 @export var damage: float = 10.0
 @export var cooldown: float = 0.5
+@export var weapon_name: String = "Weapon"
 
+var level: int = 1
 var _cooldown_timer: float = 0.0
 var _can_attack: bool = true
+
+func level_up() -> void:
+	level += 1
+	damage *= 1.1
+	cooldown *= 0.9
+	print(weapon_name, " leveled up to ", level, "! Damage: ", damage, ", Cooldown: ", cooldown)
 
 func _process(delta: float) -> void:
 	if not _can_attack:

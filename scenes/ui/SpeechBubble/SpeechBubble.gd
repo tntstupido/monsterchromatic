@@ -26,23 +26,31 @@ func _process(delta: float) -> void:
 	_time += delta * 15.0 # Speed of shaking
 	queue_redraw()
 
-func display_text(text: String, duration: float = default_duration) -> void:
+var _current_tween: Tween = null
+var _auto_hide: bool = true
+
+func display_text(text: String, duration: float = default_duration, auto_hide: bool = true) -> void:
+	_auto_hide = auto_hide
 	_label.text = text
-	
+
+	# Kill existing tween if any
+	if _current_tween:
+		_current_tween.kill()
+
 	# Wait for layout update
 	await get_tree().process_frame
-	
+
 	var size = _margin_container.get_combined_minimum_size()
 	if size.x < 60: size.x = 60 # Minimum width
 	if size.y < 30: size.y = 30 # Minimum height
-	
+
 	_rect = Rect2(-size.x / 2.0, -size.y - 50, size.x, size.y)
 	_margin_container.size = size
 	_margin_container.position = _rect.position
-	
+
 	# Pre-calculate base points for the bubble
 	_points = _get_rounded_rect_points(_rect, 10.0)
-	
+
 	# Pre-calculate tail points
 	var tail_width = 15.0
 	_tail_points = PackedVector2Array([
@@ -50,15 +58,17 @@ func display_text(text: String, duration: float = default_duration) -> void:
 		Vector2(0, -30), # Tip of the tail
 		Vector2(tail_width, _rect.position.y + _rect.size.y)
 	])
-	
+
 	_active = true
-	
+
 	# Animate in
-	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "modulate:a", 1.0, 0.2)
-	tween.tween_interval(duration)
-	tween.tween_property(self, "modulate:a", 0.0, 0.3)
-	tween.finished.connect(queue_free)
+	_current_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_current_tween.tween_property(self, "modulate:a", 1.0, 0.2)
+
+	if _auto_hide:
+		_current_tween.tween_interval(duration)
+		_current_tween.tween_property(self, "modulate:a", 0.0, 0.3)
+		_current_tween.finished.connect(queue_free)
 
 func _draw() -> void:
 	if not _active: return

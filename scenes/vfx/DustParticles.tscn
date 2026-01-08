@@ -9,12 +9,9 @@ script/source = "extends CPUParticles2D
 
 func _ready():
 	emitting = true
-	var timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = 0.7
-	timer.one_shot = true
-	timer.start()
-	timer.timeout.connect(queue_free)
+	# Use a simple timer - finished signal can be unreliable
+	await get_tree().create_timer(lifetime + 0.2).timeout
+	queue_free()
 "
 
 [node name="DustParticles" type="CPUParticles2D"]

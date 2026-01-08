@@ -20,6 +20,7 @@ var _facing_sign: float = 1.0
 
 @export var dust_scene: PackedScene = preload("res://scenes/vfx/DustParticles.tscn")
 var _last_wave: float = 0.0
+var _can_spawn_dust: bool = false
 
 var speech_bubble_scene := preload("res://scenes/ui/SpeechBubble/SpeechBubble.tscn")
 var _idle_comment_timer: float = 0.0
@@ -28,6 +29,10 @@ var _idle_comment_timer: float = 0.0
 func _ready() -> void:
 	_health = max_health
 	add_to_group("enemy")
+	
+	# Delay dust spawning to prevent spawn point residue
+	await get_tree().create_timer(0.5).timeout
+	_can_spawn_dust = true
 
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -133,7 +138,8 @@ func _update_wobble(delta: float) -> void:
 	_last_wave = wave
 
 func _spawn_dust() -> void:
-	if not dust_scene: return
+	if not dust_scene or not _can_spawn_dust: return
 	var dust = dust_scene.instantiate()
+	var spawn_pos = global_position + Vector2(0, 10)
 	get_parent().add_child(dust)
-	dust.global_position = global_position + Vector2(0, 10)
+	dust.global_position = spawn_pos

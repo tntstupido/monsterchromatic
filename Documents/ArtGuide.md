@@ -30,6 +30,48 @@ Oblačići koji omogućavaju neprijateljima da komuniciraju sa igračem na cini�
 *   **Cinični UI**: Opisi predmeta i poruke na ekranima koje ismevaju igračevu šansu za preživljavanje.
 *   **Primer**: Umesto samo "Level Up", koristimo "Prolonging the inevitable".
 
+### Shop Screen UI ("The Crypt") - ✅ IMPLEMENTIRANO
+*   **Status**: Potpuno implementirano 2026-01-08 ([Detaljna dokumentacija](ShopScreenUI/implementation_summary.md))
+*   **Koncept**: Prodavnica je "klopka" ili grobnica sa ciničnim prodavcem.
+
+#### Shopkeeper Karakter
+*   **Dizajn**: Hooded merchant sprite sa kesom novca (`shop_keeper_character.png`)
+*   **Veličina**: 192x192 piksela, pozicioniran na vrhu ekrana
+*   **Animacije**:
+    *   **Continuous Wobble**: Konstantna 1.05x0.95 ↔ 0.95x1.05 scale loop animacija
+    *   **Click Reactions** (3 tipa):
+        *   **Wiggle**: -5° → +5° → 0° rotacija (left-right shake)
+        *   **Bounce**: Squash & stretch sa TRANS_BACK easing
+        *   **Shrug**: 15° rotacija + 10px pokret nagore
+*   **Interakcija**: Clickable sa 0.5s cooldown-om između klikova
+*   **Sarkastični Komentari**: 16 ciničnih komentara koji se rotiraju na klik
+    *   Primeri: "Pick your poison.", "It won't help anyway.", "Death is patient. I'm not."
+*   **Speech Bubble**: Persistent mode (ne nestaje automatski), sa shaky effect-om
+
+#### Upgrade Kartice
+*   **Layout**: 2x2 grid (4 kartice) optimizovan za portrait mobile
+*   **Veličina**: 280x380 piksela (40% veće za mobile visibility)
+*   **Texture System**: 8 texture varijanti sa random selekcijom:
+    *   6 paper tekstura (torn parchment look)
+    *   2 metal teksture (rusted plates)
+*   **Ivice**: Jagged/torn edges iz texture asset-a (ne proceduralno)
+*   **Ikonice**: 120x120 piksela, AI-generisane (Gemini) sa thick black outlines
+    *   `health_icon.png` - Cross/plus symbol
+    *   `speed_icon.png` - Lightning bolt
+    *   `axe_icon.png` - Throwing axe
+    *   `hammer_icon.png` - War hammer
+*   **Tipografija**:
+    *   Title: 26px black text, centered
+    *   Description: 18px near-black text, centered with word wrap
+*   **Padding**: 20px na sve strane da tekst ne prelazi jagged edges
+*   **Interakcija**: Hover efekti (scale + wobble) za feedback
+
+#### Mobile Optimization
+*   **Target Platforms**: iPhone, Android phones, tablets
+*   **Aspect Ratios**: Testirano na 9:16, 9:19.5, 9:20, 3:4
+*   **Spacing**: 40px gap između kartica (comfortable touch targets)
+*   **Testing Tool**: `ResolutionTester.gd` (F1 toggle) sa 6 preset rezolucija
+
 ---
 
 ## 3. Zvučni Identitet (Audio & SFX) - *[U pripremi]*

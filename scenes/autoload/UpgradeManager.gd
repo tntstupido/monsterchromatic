@@ -1,4 +1,5 @@
 extends Node
+const WeaponUpgradeClass = preload("res://scenes/resources/WeaponUpgrade.gd")
 
 var _upgrade_pool: Array[Upgrade] = []
 
@@ -6,7 +7,7 @@ func _ready() -> void:
 	_init_pool()
 
 func _init_pool() -> void:
-	# Temporary: Create some dummy upgrades for testing
+	# 1. Stats Upgrades
 	var u1 = Upgrade.new()
 	u1.id = "heal"
 	u1.title = "Denial of Death"
@@ -17,14 +18,26 @@ func _init_pool() -> void:
 	u2.title = "Panic Sprints"
 	u2.description = "Speed Up (Run from your problems)"
 	
-	var u3 = Upgrade.new()
-	u3.id = "damage"
-	u3.title = "Hate"
-	u3.description = "Increase Damage (Pure spite)"
-	
 	_upgrade_pool.append(u1)
 	_upgrade_pool.append(u2)
-	_upgrade_pool.append(u3)
+
+	# 2. Weapon Upgrades
+	var axe = WeaponUpgradeClass.new()
+	axe.id = "weapon_axe"
+	axe.weapon_name = "Axe"
+	axe.weapon_scene = preload("res://scenes/weapon/Axe.tscn")
+	axe.title = "Cold Iron Axe"
+	axe.description = "Acquire or upgrade the Boomerang Axe."
+
+	var hammer = WeaponUpgradeClass.new()
+	hammer.id = "weapon_hammer"
+	hammer.weapon_name = "Hammer"
+	hammer.weapon_scene = preload("res://scenes/weapon/Hammer.tscn")
+	hammer.title = "Giant Mallet"
+	hammer.description = "Acquire or upgrade the Circle Hammer."
+	
+	_upgrade_pool.append(axe)
+	_upgrade_pool.append(hammer)
 
 func get_random_upgrades(amount: int) -> Array[Upgrade]:
 	var options: Array[Upgrade] = []
@@ -44,16 +57,12 @@ func apply_upgrade(upgrade: Upgrade) -> void:
 	if not player:
 		return
 		
+	# Polymorphic call
+	upgrade.apply_upgrade(player)
+	
+	# Fallback for old/simple upgrades if needed
 	match upgrade.id:
 		"heal":
-			if player.has_method("heal"):
-				# Assuming max health is available or heal handles overflow
-				player.heal(1000.0)
+			player.heal(100.0)
 		"speed":
-			if "move_speed" in player:
-				player.move_speed *= 1.1
-		"damage":
-			# Placeholder: 需要 implementirati globalni damage modifier
-			print("Damage increased (TODO)")
-	
-	upgrade.apply_upgrade(player)
+			player.speed_multiplier *= 1.1

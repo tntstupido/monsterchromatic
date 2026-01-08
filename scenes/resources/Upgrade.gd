@@ -6,6 +6,6 @@ class_name Upgrade
 @export_multiline var description: String
 # @export var icon: Texture2D # Uncomment when we have icons
 
-func apply_upgrade(player: Node) -> void:
+func apply_upgrade(_player: Node) -> void:
 	print("Applying upgrade: ", title)
 	# Logic will be implemented in subclasses or via strict ID checking in UpgradeManager

@@ -17,6 +17,17 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
     - [x] Create the Art & Style Guide ([ArtGuide.md](file:///home/mladen/Unreal/Godot/Projects/MonsterChromatic/Documents/ArtGuide.md)).
     - [x] Implement Sarcastic Speech Bubble system.
     - [x] **Vizuelni Efekti (VFX)**: Dodata prašina (dust particles) pri kretanju.
+- [x] **Shop UI Revamp ("The Crypt")** - ✅ COMPLETED 2026-01-08
+    - [x] **Dedicated Shopkeeper Character**: Kreiran custom sprite (hooded merchant) sa continuous wobble animacijom.
+    - [x] **Interactive Shopkeeper**: Clickable sa 3 random reakcije (wiggle, bounce, shrug) i cooldown sistemom (0.5s).
+    - [x] **Sarcastic Speech Bubbles**: Integrisano 16 sarkastičnih komentara sa persistent bubble mode-om.
+    - [x] **Upgrade Icons**: 4 AI-generisane ikonice (health, speed, axe, hammer) sa match-based loading sistemom.
+    - [x] **Jagged Card Edges**: Implementirano sa 8 texture varijanti (6 paper + 2 metal) sa random selekcijom.
+    - [x] **Mobile Layout Optimization**: 2x2 grid layout, card size 280x380, icon 120x120, optimizovano za portrait.
+    - [x] **Resolution Testing Tool**: Debug tool (`ResolutionTester.gd`) za testiranje 6 mobilnih aspect ratio-a.
+    - [x] **Code Quality**: Sva editor upozorenja ispravljenja (UID, shadowing, unused params).
+- [ ] **Bug Fixes**
+    - [ ] **Dust Particles Cleanup**: DustParticles nodes ne brišu se pravilno i ostaju zaglavljeni na spawn tačkama.
 
 ## Planirane Funkcionalnosti (Backlog)
 
@@ -45,7 +56,9 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
     - [ ] **Chromatic Golem** (Menja boje/otpornosti).
     - [ ] **The Void Lord** (Finalni boss, Bullet Hell).
 
-- [ ] **Nova Oružja**:
+- [ ] **Nova Oružja & Sistem**:
+    - [x] **Weapon Stacking**: Oružja su sada trajna i mogu se gomilati (simultani napadi).
+    - [x] **Level-up Mehanika**: Nadogradnja postojećeg oružja povećava damage i brzinu.
     - [ ] **Sword** (Melee, Cone Area).
     - [ ] **Spear** (Melee, Thrust/Pierce).
     - [ ] **Magic Wand** (Projectile, Auto-target closest).
@@ -67,9 +80,9 @@ Ovaj dokument služi za planiranje budućih funkcionalnosti i praćenje ideja.
 ### Faza 2.5: Environment & Atmosphere (Groblje)
 - [/] **Unapređenje Okruženja**:
     - [x] Implementiran sistem Y-sortiranih interaktivnih propova.
-    - [x] Dodata Scary Tree varijanta (Smanjen broj na sceni radi preglednosti).
-    - [ ] **Podloga (Floor)**: Kreirati "shaky" hand-painted tileset za zemlju (Veličina tile-ova: 256x256).
-    - [ ] **Propovi**: Dodati Headstones i ostale grobljanske detalje koristeći postojeće/nove asete.
+    - [x] **Vegetacija (Foliage)**: Implementiran novi `foliage_1.png` tileset sa randomizacijom kroz `Foliage.gd`.
+    - [x] **Podloga (Floor)**: Implementirana proceduralna "beskonačna" podloga kroz `ProceduralFloor.gd`.
+    - [x] **Propovi**: Implementirana proceduralna "beskonačna" generacija headstone-a i drveća (Refaktorisan `PropSpawner.gd`).
 
 ## Balansiranje i Poliranje
 - [x] **Balansiranje Težine**:
