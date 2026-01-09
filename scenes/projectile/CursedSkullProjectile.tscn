@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://cursed_skull_projectile"]
+
+[ext_resource type="Script" path="res://scenes/projectile/HomingProjectile.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/weapons/cursed_skull.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/particles/purple_particle.png" id="3"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 25.0
+
+[node name="CursedSkullProjectile" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+monitoring = true
+monitorable = false
+script = ExtResource("1")
+speed = 300.0
+damage = 18.0
+max_life_time = 4.0
+homing_strength = 4.0
+explosion_radius = 120.0
+explosion_damage_percent = 0.75
+detection_range = 400.0
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 20
+lifetime = 0.6
+preprocess = 0.2
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+scale_amount_min = 0.3
+scale_amount_max = 0.6
+color = Color(0.6, 0.2, 0.8, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+texture = ExtResource("3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")

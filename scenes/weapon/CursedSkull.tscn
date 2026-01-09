@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cursed_skull"]
+
+[ext_resource type="Script" path="res://scenes/weapon/CursedSkullWeapon.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/weapons/cursed_skull.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://cursed_skull_projectile" path="res://scenes/projectile/CursedSkullProjectile.tscn" id="3"]
+
+[node name="CursedSkull" type="Node2D"]
+z_index = 2
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1")
+projectile_speed = 300.0
+spread_degrees = 0.0
+projectile_scene = ExtResource("3")
+damage = 25.0
+cooldown = 1.5
+weapon_name = "Cursed Skull"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(30, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2")

@@ -158,3 +158,30 @@ func get_closest_enemy_direction(from_position: Vector2) -> Vector2:
 
 func _on_projectile_freed() -> void:
 	pass
+
+
+# Debug Console support methods
+func get_random_enemy_scene() -> PackedScene:
+	# List of all available enemy types
+	var enemy_scenes = [
+		preload("res://scenes/enemy/Enemy.tscn"),        # Basic enemy
+		preload("res://scenes/enemy/SlimeEnemy.tscn"),   # Slime
+		preload("res://scenes/enemy/BatEnemy.tscn"),     # Bat
+		preload("res://scenes/enemy/FastEnemy.tscn"),    # Fast enemy
+	]
+	return enemy_scenes[randi() % enemy_scenes.size()]
+
+
+func spawn_enemy(scene: PackedScene, spawn_pos: Vector2) -> Node:
+	if not scene:
+		return null
+
+	var enemy = scene.instantiate()
+	enemies.add_child(enemy)
+	enemy.global_position = spawn_pos
+
+	# Connect signals just like in _on_enemy_spawned
+	if enemy.has_signal("died"):
+		enemy.died.connect(_on_enemy_died)
+
+	return enemy
