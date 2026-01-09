@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c7f0wgopcsh3h"
+path="res://.godot/imported/Hell Beast Attack 011.wav-23a4fcfd4f3e29d8707c3d4ae65657f1.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Demonic/Hell Beast/Hell Beast Attack 011.wav"
+dest_files=["res://.godot/imported/Hell Beast Attack 011.wav-23a4fcfd4f3e29d8707c3d4ae65657f1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcf3kaw3qck05"
+path="res://.godot/imported/Goblin War Cry 004.wav-0fcd4e66bcc1f2a4ef1449dd2dca0873.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Humanoid/Goblin/Goblin War Cry 004.wav"
+dest_files=["res://.godot/imported/Goblin War Cry 004.wav-0fcd4e66bcc1f2a4ef1449dd2dca0873.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

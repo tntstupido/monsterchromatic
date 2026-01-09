@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3v4ful171dfb"
+path="res://.godot/imported/Toon Phrase 005.wav-6591dc2a084d59d106bb3a8010c1fe58.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Cute/Toon/Toon Phrase 005.wav"
+dest_files=["res://.godot/imported/Toon Phrase 005.wav-6591dc2a084d59d106bb3a8010c1fe58.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -43,6 +43,12 @@ func set_upgrade(upgrade: Resource) -> void:
 			icon_path = "res://assets/ui/icons/axe_icon.png"
 		"weapon_hammer":
 			icon_path = "res://assets/ui/icons/hammer_icon.png"
+		"weapon_blessed_cross":
+			icon_path = "res://assets/ui/icons/blessed_cross_icon.png"
+		"weapon_cursed_skull":
+			icon_path = "res://assets/ui/icons/cursed_skull_icon.png"
+		"weapon_prayer_beads":
+			icon_path = "res://assets/ui/icons/prayer_beads_icon.png"
 
 	if icon_path != "" and ResourceLoader.exists(icon_path):
 		icon_rect.texture = load(icon_path)

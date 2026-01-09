@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3hu4l5io00ek"
+path="res://.godot/imported/Naga Idle 008.wav-07a425ec113f5418a1f6c0e3e90fcd6c.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Naga/Naga Idle 008.wav"
+dest_files=["res://.godot/imported/Naga Idle 008.wav-07a425ec113f5418a1f6c0e3e90fcd6c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

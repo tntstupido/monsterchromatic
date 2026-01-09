@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgtdyd8hlcs2x"
+path="res://.godot/imported/Mr. Froggy Dislikes 004.wav-77b192181729ab46a0c8721bca8a4369.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Cute/Mr. Froggy/Mr. Froggy Dislikes 004.wav"
+dest_files=["res://.godot/imported/Mr. Froggy Dislikes 004.wav-77b192181729ab46a0c8721bca8a4369.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

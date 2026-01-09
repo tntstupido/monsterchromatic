@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkkt1oswqiady"
+path="res://.godot/imported/Skeletal Lord Rise 001.wav-129e9b86828d5e1477b5c6332ccfe802.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Undead/Skeleton/Skeletal Lord Rise 001.wav"
+dest_files=["res://.godot/imported/Skeletal Lord Rise 001.wav-129e9b86828d5e1477b5c6332ccfe802.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

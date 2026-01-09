@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://kyb2g4g3jt0n"
+path="res://.godot/imported/Eldritch Horror Attack 008.wav-1a89e4afadff5217d05d1f34ba366f1a.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Eldritch Horror/Eldritch Horror Attack 008.wav"
+dest_files=["res://.godot/imported/Eldritch Horror Attack 008.wav-1a89e4afadff5217d05d1f34ba366f1a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

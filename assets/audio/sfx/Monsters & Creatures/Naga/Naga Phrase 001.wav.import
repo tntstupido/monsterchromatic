@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d36gpqhd0valy"
+path="res://.godot/imported/Naga Phrase 001.wav-34c0e873ac8e762f42907178245f6045.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Naga/Naga Phrase 001.wav"
+dest_files=["res://.godot/imported/Naga Phrase 001.wav-34c0e873ac8e762f42907178245f6045.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

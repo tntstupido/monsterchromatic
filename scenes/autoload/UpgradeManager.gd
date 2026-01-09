@@ -35,9 +35,33 @@ func _init_pool() -> void:
 	hammer.weapon_scene = preload("res://scenes/weapon/Hammer.tscn")
 	hammer.title = "Giant Mallet"
 	hammer.description = "Acquire or upgrade the Circle Hammer."
-	
+
+	var blessed_cross = WeaponUpgradeClass.new()
+	blessed_cross.id = "weapon_blessed_cross"
+	blessed_cross.weapon_name = "Blessed Cross"
+	blessed_cross.weapon_scene = preload("res://scenes/weapon/BlessedCross.tscn")
+	blessed_cross.title = "Blessed Cross"
+	blessed_cross.description = "Holy hardware! Fires 4-way piercing crosses."
+
+	var cursed_skull = WeaponUpgradeClass.new()
+	cursed_skull.id = "weapon_cursed_skull"
+	cursed_skull.weapon_name = "Cursed Skull"
+	cursed_skull.weapon_scene = preload("res://scenes/weapon/CursedSkull.tscn")
+	cursed_skull.title = "Cursed Skull"
+	cursed_skull.description = "Alas, poor Yorick... now he's YOUR problem."
+
+	var prayer_beads = WeaponUpgradeClass.new()
+	prayer_beads.id = "weapon_prayer_beads"
+	prayer_beads.weapon_name = "Prayer Beads"
+	prayer_beads.weapon_scene = preload("res://scenes/weapon/PrayerBeads.tscn")
+	prayer_beads.title = "Prayer Beads"
+	prayer_beads.description = "Orbiting prayers. (God's not listening anyway.)"
+
 	_upgrade_pool.append(axe)
 	_upgrade_pool.append(hammer)
+	_upgrade_pool.append(blessed_cross)
+	_upgrade_pool.append(cursed_skull)
+	_upgrade_pool.append(prayer_beads)
 
 func get_random_upgrades(amount: int) -> Array[Upgrade]:
 	var options: Array[Upgrade] = []

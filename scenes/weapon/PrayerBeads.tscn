@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://prayer_beads"]
+
+[ext_resource type="Script" path="res://scenes/weapon/OrbitalWeapon.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://prayer_bead" path="res://scenes/projectile/PrayerBead.tscn" id="2"]
+
+[node name="PrayerBeads" type="Node2D"]
+z_index = 4
+script = ExtResource("1")
+orbit_radius = 120.0
+rotation_speed = 180.0
+num_orbitals = 3
+orbital_scene = ExtResource("2")
+damage = 8.0
+cooldown = 0.0
+weapon_name = "Prayer Beads"

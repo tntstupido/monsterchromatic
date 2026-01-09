@@ -21,7 +21,7 @@ InputManager="*res://autoload/InputManager.gd"
 ExperienceManager="*res://scenes/autoload/ExperienceManager.gd"
 UpgradeManager="*res://scenes/autoload/UpgradeManager.gd"
 AudioManager="*res://scenes/autoload/AudioManager.gd"
-ResolutionTester="*res://scenes/debug/ResolutionTester.tscn"
+DebugConsole="*res://scenes/autoload/DebugConsole.gd"
 
 [display]
 

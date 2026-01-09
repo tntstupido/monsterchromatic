@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://5xgmwi7ns6xn"
+path="res://.godot/imported/Demon Phrase 001.wav-1ceb40364689cddab52c686e39c08533.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Demonic/Demon/Demon Phrase 001.wav"
+dest_files=["res://.godot/imported/Demon Phrase 001.wav-1ceb40364689cddab52c686e39c08533.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

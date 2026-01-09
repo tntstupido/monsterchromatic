@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dlt7w8psidiq6"
+path="res://.godot/imported/Dragon Roaring 001.wav-526be9196f897709ab6261100d66fafc.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Dragon/Dragon Roaring 001.wav"
+dest_files=["res://.godot/imported/Dragon Roaring 001.wav-526be9196f897709ab6261100d66fafc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

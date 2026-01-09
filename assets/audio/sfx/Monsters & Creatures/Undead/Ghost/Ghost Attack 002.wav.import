@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b83815mcr4yp5"
+path="res://.godot/imported/Ghost Attack 002.wav-a5025c32e1b1637cf4e8f020b3b7e875.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Undead/Ghost/Ghost Attack 002.wav"
+dest_files=["res://.godot/imported/Ghost Attack 002.wav-a5025c32e1b1637cf4e8f020b3b7e875.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

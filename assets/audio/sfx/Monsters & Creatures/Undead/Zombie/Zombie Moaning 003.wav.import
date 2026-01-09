@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://broqj3x3aojd8"
+path="res://.godot/imported/Zombie Moaning 003.wav-b87b5943b66c6a636e8bed30e025b5ab.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Undead/Zombie/Zombie Moaning 003.wav"
+dest_files=["res://.godot/imported/Zombie Moaning 003.wav-b87b5943b66c6a636e8bed30e025b5ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

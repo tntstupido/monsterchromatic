@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnmk7s1dpcpe4"
+path="res://.godot/imported/Eldritch Horror Attack 007.wav-995fc9a686733c87d9d994d990584bcf.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Monsters & Creatures/Eldritch Horror/Eldritch Horror Attack 007.wav"
+dest_files=["res://.godot/imported/Eldritch Horror Attack 007.wav-995fc9a686733c87d9d994d990584bcf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
