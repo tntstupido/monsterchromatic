@@ -1,4 +1,4 @@
-extends "res://scenes/weapon/Weapon.gd"
+extends Weapon
 
 @export var projectile_speed: float = 700.0
 @export var spread_degrees: float = 5.0

@@ -7,6 +7,7 @@
 radius = 60.0
 
 [node name="Hammer" type="Node2D"]
+z_index = 0
 script = ExtResource("1")
 swing_duration = 0.5
 swing_angle = 360.0

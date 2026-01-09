@@ -1,4 +1,4 @@
-extends "res://scenes/weapon/Weapon.gd"
+extends Weapon
 
 @export var swing_duration: float = 0.2
 @export var swing_angle: float = 90.0
@@ -49,5 +49,7 @@ func _on_body_entered(body: Node) -> void:
 		if not body in _hit_this_swing:
 			_hit_this_swing.append(body)
 			body.take_damage(damage)
+			# Play hit sound using parent class method
+			_play_hit_sound()
 	elif body.is_in_group("environment") and body.has_method("wobble"):
 		body.wobble()

@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://boss_enemy"]
+[gd_scene load_steps=8 format=3 uid="uid://c8bgdqbb77l6o"]
 
-[ext_resource type="Script" path="res://scenes/enemy/Enemy.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Sprites/head_scary.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://b1aqpyyojq651" path="res://scenes/enemy/Enemy.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://cvn0di5g4ulsq" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Zombie/Zombie Dies 002.wav" id="2_ianse"]
+[ext_resource type="Texture2D" uid="uid://dvihjm8iu3kt2" path="res://assets/enemies/Sprites/head_scary.png" id="2_sprite"]
+[ext_resource type="AudioStream" uid="uid://7o2ym1tckadf" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Zombie/Zombie Pain 001.wav" id="3_py6ag"]
+[ext_resource type="AudioStream" uid="uid://bblb2oww4qjub" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Zombie/Zombie Attack 006.wav" id="4_8ic5h"]
+[ext_resource type="AudioStream" uid="uid://broqj3x3aojd8" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Zombie/Zombie Moaning 003.wav" id="5_gid4q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
-radius = 100.0
+radius = 47.169907
 
 [node name="BossEnemy" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -14,9 +18,14 @@ script = ExtResource("1_script")
 move_speed = 110.0
 max_health = 800.0
 contact_damage = 25.0
+death_sound = ExtResource("2_ianse")
+hurt_sound = ExtResource("3_py6ag")
+attack_sound = ExtResource("4_8ic5h")
+idle_sound = ExtResource("5_gid4q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -13.5)
 shape = SubResource("CircleShape2D_boss")

@@ -1,20 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bat_enemy"]
+[gd_scene load_steps=8 format=3 uid="uid://bge6syc6bim3s"]
 
-[ext_resource type="Script" path="res://scenes/enemy/BatEnemy.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Sprites/bat.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://djs0osue56861" path="res://scenes/enemy/BatEnemy.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://dkltsndh1ajwk" path="res://assets/audio/sfx/Monsters & Creatures/Naga/Naga Idle 001.wav" id="2_hll62"]
+[ext_resource type="Texture2D" uid="uid://bkdkbuv8b3fcw" path="res://assets/enemies/Sprites/bat.png" id="2_sprite"]
+[ext_resource type="AudioStream" uid="uid://btx1tsucs8o2x" path="res://assets/audio/sfx/Monsters & Creatures/Naga/Naga Attack 003.wav" id="3_4hace"]
+[ext_resource type="AudioStream" uid="uid://db0w4nl1wpgl7" path="res://assets/audio/sfx/Monsters & Creatures/Naga/Naga Attack 001.wav" id="4_1p06m"]
+[ext_resource type="AudioStream" uid="uid://bg4bfohq6d61u" path="res://assets/audio/sfx/Monsters & Creatures/Naga/Naga Idle 002.wav" id="5_1wwot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bat"]
 radius = 35.0
 
 [node name="BatEnemy" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 1
 script = ExtResource("1_script")
+zigzag_amplitude = 1.0
 move_speed = 180.0
 max_health = 25.0
-damage = 10.0
-zigzag_frequency = 4.0
-zigzag_amplitude = 1.0
+death_sound = ExtResource("2_hll62")
+hurt_sound = ExtResource("3_4hace")
+attack_sound = ExtResource("4_1p06m")
+idle_sound = ExtResource("5_1wwot")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_sprite")

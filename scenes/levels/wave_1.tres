@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/resources/WaveDefinition.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://enemy" path="res://scenes/enemy/Enemy.tscn" id="2_enemy"]
-
-[ext_resource type="PackedScene" uid="uid://slime_enemy" path="res://scenes/enemy/SlimeEnemy.tscn" id="3_slime"]
-
-[ext_resource type="PackedScene" uid="uid://bat_enemy" path="res://scenes/enemy/BatEnemy.tscn" id="4_bat"]
+[ext_resource type="PackedScene" uid="uid://c3wneu0stvfcv" path="res://scenes/enemy/SlimeEnemy.tscn" id="3_slime"]
+[ext_resource type="PackedScene" uid="uid://bge6syc6bim3s" path="res://scenes/enemy/BatEnemy.tscn" id="4_bat"]
 
 [resource]
 script = ExtResource("1_script")

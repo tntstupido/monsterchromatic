@@ -8,6 +8,13 @@ signal died(enemy)
 @export var contact_damage: float = 10.0
 @export var contact_cooldown: float = 0.7
 
+@export_group("Sound Effects")
+@export var death_sound: AudioStream
+@export var hurt_sound: AudioStream
+@export var attack_sound: AudioStream
+@export var idle_sound: AudioStream
+@export var idle_sound_interval: Vector2 = Vector2(8.0, 15.0)  # Min/Max seconds between idle sounds
+
 var target: Node2D
 var _health: float
 var _contact_timer: float = 0.0
@@ -24,12 +31,16 @@ var _can_spawn_dust: bool = false
 
 var speech_bubble_scene := preload("res://scenes/ui/SpeechBubble/SpeechBubble.tscn")
 var _idle_comment_timer: float = 0.0
+var _idle_sound_timer: float = 0.0
 
 
 func _ready() -> void:
 	_health = max_health
 	add_to_group("enemy")
-	
+
+	# Initialize idle sound timer with random start
+	_idle_sound_timer = randf_range(idle_sound_interval.x, idle_sound_interval.y)
+
 	# Delay dust spawning to prevent spawn point residue
 	await get_tree().create_timer(0.5).timeout
 	_can_spawn_dust = true
@@ -51,12 +62,18 @@ func _physics_process(delta: float) -> void:
 
 	_contact_timer = max(0.0, _contact_timer - delta)
 	_idle_comment_timer = max(0.0, _idle_comment_timer - delta)
-	
+	_idle_sound_timer = max(0.0, _idle_sound_timer - delta)
+
 	if _idle_comment_timer <= 0.0 and velocity.length() > 10.0:
 		_idle_comment_timer = randf_range(5.0, 15.0)
 		if randf() < 0.3:
 			var idle_comments = ["Come here!", "Stop running!", "I see you...", "Dinnertime!", "Looking tasty.", "Don't trip!"]
 			say(idle_comments.pick_random(), 1.5)
+
+	# Play idle sound at intervals
+	if _idle_sound_timer <= 0.0 and idle_sound:
+		_play_sound(idle_sound)
+		_idle_sound_timer = randf_range(idle_sound_interval.x, idle_sound_interval.y)
 
 	var collision := move_and_collide(velocity * delta)
 
@@ -66,11 +83,15 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(amount: float) -> void:
 	_health -= amount
-	
+
+	# Play hurt sound
+	if hurt_sound:
+		_play_sound(hurt_sound)
+
 	var responses = ["Ouch!", "Is that all?", "Nice try!", "Watch it!", "You're bad at this.", "Meh."]
 	if randf() < 0.4:
 		say(responses.pick_random(), 1.5)
-		
+
 	if _health <= 0.0:
 		_die()
 
@@ -88,16 +109,25 @@ func _hit_player(player: Node) -> void:
 	if _contact_timer > 0.0:
 		return
 	_contact_timer = contact_cooldown
+
+	# Play attack sound
+	if attack_sound:
+		_play_sound(attack_sound)
+
 	if player.has_method("take_damage"):
 		player.take_damage(contact_damage)
 
 
 func _die() -> void:
+	# Play death sound
+	if death_sound:
+		_play_sound(death_sound)
+
 	var gem_scene = preload("res://scenes/objects/Gem.tscn")
 	var gem = gem_scene.instantiate()
 	gem.global_position = global_position
 	get_parent().call_deferred("add_child", gem)
-	
+
 	died.emit(self)
 	queue_free()
 
@@ -143,3 +173,9 @@ func _spawn_dust() -> void:
 	var spawn_pos = global_position + Vector2(0, 10)
 	get_parent().add_child(dust)
 	dust.global_position = spawn_pos
+
+
+func _play_sound(sound: AudioStream) -> void:
+	if not sound:
+		return
+	AudioManager.play_sound(sound, global_position)

@@ -2,11 +2,19 @@ extends CharacterBody2D
 
 signal health_changed(current, maximum)
 signal died
+signal weapon_added(weapon)
+signal weapon_leveled_up(weapon)
 
 @export var move_speed: float = 260.0
 @export var acceleration: float = 1400.0
 @export var friction: float = 1800.0
 @export var max_health: float = 100.0
+
+@export_group("Sound Effects")
+@export var hurt_sound: AudioStream
+@export var death_sound: AudioStream
+@export var heal_sound: AudioStream
+@export var level_up_sound: AudioStream
 
 var speed_multiplier: float = 1.0
 
@@ -104,6 +112,9 @@ func add_weapon(weapon_scene: PackedScene) -> void:
 			_muzzle.add_child(new_weapon)
 		else:
 			add_child(new_weapon)
+
+		# Emit signal for UI
+		weapon_added.emit(new_weapon)
 	else:
 		push_error("Equipped scene is not a Weapon")
 		new_weapon.queue_free()
@@ -133,13 +144,25 @@ func _get_move_vector() -> Vector2:
 func take_damage(amount: float) -> void:
 	_health -= amount
 	emit_signal("health_changed", _health, max_health)
+
 	if _health <= 0.0:
+		# Play death sound
+		if death_sound:
+			AudioManager.play_sound(death_sound, global_position)
 		died.emit()
+	else:
+		# Play hurt sound
+		if hurt_sound:
+			AudioManager.play_sound(hurt_sound, global_position)
 
 
 func heal(amount: float) -> void:
 	_health = clamp(_health + amount, 0.0, max_health)
 	emit_signal("health_changed", _health, max_health)
+
+	# Play heal sound
+	if heal_sound:
+		AudioManager.play_ui_sound(heal_sound)
 
 
 func _update_facing(input_dir: Vector2) -> void:
@@ -188,6 +211,7 @@ func _spawn_dust() -> void:
 	if not dust_scene or not _can_spawn_dust: return
 	var dust = dust_scene.instantiate()
 	var spawn_pos = global_position + Vector2(0, 10)
-	print("[PLAYER] Spawning dust at: ", spawn_pos, " | Player at: ", global_position)
+	# Debug print disabled
+	# print("[PLAYER] Spawning dust at: ", spawn_pos, " | Player at: ", global_position)
 	get_parent().add_child(dust)
 	dust.global_position = spawn_pos

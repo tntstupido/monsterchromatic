@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/resources/WaveDefinition.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://enemy" path="res://scenes/enemy/Enemy.tscn" id="2_enemy"]
-[ext_resource type="PackedScene" uid="uid://fast_enemy" path="res://scenes/enemy/FastEnemy.tscn" id="3_fast"]
-[ext_resource type="PackedScene" uid="uid://boss_enemy" path="res://scenes/enemy/BossEnemy.tscn" id="4_boss"]
+[ext_resource type="PackedScene" uid="uid://cx3e1vy2q7p6f" path="res://scenes/enemy/FastEnemy.tscn" id="3_fast"]
+[ext_resource type="PackedScene" uid="uid://c8bgdqbb77l6o" path="res://scenes/enemy/BossEnemy.tscn" id="4_boss"]
 
 [resource]
 script = ExtResource("1_script")

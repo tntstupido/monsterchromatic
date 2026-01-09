@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://enemy"]
+[gd_scene load_steps=8 format=3 uid="uid://enemy"]
 
 [ext_resource type="Script" uid="uid://b1aqpyyojq651" path="res://scenes/enemy/Enemy.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://qas2a4w0ahxj" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Toon/Toon Phrase 003.wav" id="2_img3j"]
+[ext_resource type="AudioStream" uid="uid://calmkgoehll58" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Toon/Toon Attack 003.wav" id="2_s6wwv"]
 [ext_resource type="Texture2D" uid="uid://b0wfhnt7e77sy" path="res://assets/enemies/Sprites/worm.png" id="2_worm"]
+[ext_resource type="AudioStream" uid="uid://ciod0fywfdqs0" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Toon/Toon Attack 008.wav" id="3_44ybf"]
+[ext_resource type="AudioStream" uid="uid://8a56mlk316k6" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Toon/Toon Phrase 001.wav" id="5_k74vj"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 50.0
@@ -10,6 +14,10 @@ radius = 50.0
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1")
+death_sound = ExtResource("2_img3j")
+hurt_sound = ExtResource("2_s6wwv")
+attack_sound = ExtResource("3_44ybf")
+idle_sound = ExtResource("5_k74vj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_worm")

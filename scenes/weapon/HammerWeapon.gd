@@ -1,49 +1,64 @@
 extends "res://scenes/weapon/MeleeWeapon.gd"
 
-@export var min_radius: float = 50.0
-@export var max_radius: float = 90.0
-@export var wobble_speed: float = 5.0
+@export var orbit_radius: float = 70.0
 @export var fixed_starting_rotation: float = 0.0 # Fixed rotation in radians (0 = right)
 @export var hit_pause_duration: float = 0.08 # Duration of hitstop on impact
+@export var anticipation_angle: float = -30.0 # Wind-up angle in degrees
+@export var anticipation_duration: float = 0.15 # Wind-up time
+@export var trail_color: Color = Color(0.8, 0.8, 0.8, 0.5) # Trail color
+@export var trail_length: int = 8 # Number of trail segments
 
 @onready var _sprite: Sprite2D = $Sprite2D
-var _time: float = 0.0
-var _base_sprite_offset: Vector2
-var _base_hitbox_offset: Vector2
 var _current_tween: Tween = null
+var _trail_points: Array[Vector2] = []
+var _is_attacking: bool = false
 
 func _ready() -> void:
 	super._ready()
 	# Set to fixed starting rotation
 	rotation = fixed_starting_rotation
-	
-	# Remember base offsets from scene
+
+	# Set fixed orbit radius for sprite and hitbox
 	if _sprite:
-		_base_sprite_offset = _sprite.position
+		var angle = _sprite.position.angle()
+		_sprite.position = Vector2.from_angle(angle) * orbit_radius
+
 	if _hitbox:
 		for child in _hitbox.get_children():
-			if child is Node2D:
-				_base_hitbox_offset = child.position
+			if child is CollisionShape2D:
+				child.position = Vector2(0, -orbit_radius)
 				break
 
 func _perform_attack(_direction: Vector2) -> void:
 	_hit_this_swing.clear()
-	# Always spin from fixed starting position, ignore direction
+	_trail_points.clear()
+	_is_attacking = true
+
 	if _hitbox:
 		_hitbox.monitoring = true
+
+		# Create smooth animation with anticipation and easing
 		_current_tween = create_tween()
-		# Spin 360 degrees and return to starting position
-		_current_tween.tween_property(self, "rotation", fixed_starting_rotation + TAU, swing_duration)
+
+		# Anticipation: Pull back slightly (reversed direction)
+		var anticipation_rot = fixed_starting_rotation - deg_to_rad(anticipation_angle)
+		_current_tween.tween_property(self, "rotation", anticipation_rot, anticipation_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+
+		# Main swing: Fast powerful rotation with ease in-out for natural feel (reversed - counterclockwise)
+		_current_tween.tween_property(self, "rotation", fixed_starting_rotation - TAU, swing_duration - anticipation_duration).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+
+		# Finish
 		_current_tween.tween_callback(func():
 			_on_attack_finished()
-			rotation = fixed_starting_rotation # Reset to starting rotation
+			rotation = fixed_starting_rotation
 			_current_tween = null
+			_is_attacking = false
 		)
 
 func _on_body_entered(body: Node) -> void:
 	# Call parent to handle damage
 	super._on_body_entered(body)
-	
+
 	# Add impact feedback
 	if body.is_in_group("enemy"):
 		_apply_hit_pause()
@@ -52,33 +67,47 @@ func _apply_hit_pause() -> void:
 	# Create shake and scale effect without pausing rotation
 	if _sprite:
 		var shake_tween = create_tween().set_parallel(true)
-		
-		# Scale up then back down (slower, more visible)
-		shake_tween.tween_property(_sprite, "scale", _sprite.scale * 1.5, 0.1)
-		shake_tween.chain().tween_property(_sprite, "scale", Vector2(0.4, 0.4), 0.1)
-		
-		# Stronger shake effect (larger random offset)
-		var shake_offset = Vector2(randf_range(-15, 15), randf_range(-15, 15))
+
+		# Scale up then back down (impact feel)
+		shake_tween.tween_property(_sprite, "scale", _sprite.scale * 1.4, 0.06)
+		shake_tween.chain().tween_property(_sprite, "scale", Vector2(0.4, 0.4), 0.08)
+
+		# Shake effect
+		var shake_offset = Vector2(randf_range(-12, 12), randf_range(-12, 12))
 		var original_pos = _sprite.position
-		shake_tween.tween_property(_sprite, "position", original_pos + shake_offset, 0.04)
-		shake_tween.chain().tween_property(_sprite, "position", original_pos, 0.04)
+		shake_tween.tween_property(_sprite, "position", original_pos + shake_offset, 0.03)
+		shake_tween.chain().tween_property(_sprite, "position", original_pos, 0.05)
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	
-	# Apply wobble effect during attack to create elliptical motion
-	if _hitbox and _hitbox.monitoring:
-		_time += delta * wobble_speed
-		var current_radius = lerp(min_radius, max_radius, (sin(_time) + 1.0) / 2.0)
-		
-		# Calculate scale factor based on base offset length and current radius
-		var base_length = _base_sprite_offset.length()
-		var scale_factor = current_radius / base_length if base_length > 0 else 1.0
-		
-		# Update positions of sprite and hitbox
-		if _sprite:
-			_sprite.position = _base_sprite_offset * scale_factor
-		if _hitbox:
-			for child in _hitbox.get_children():
-				if child is Node2D:
-					child.position = _base_hitbox_offset * scale_factor
+
+	# Update trail during attack
+	if _is_attacking and _sprite:
+		var hammer_global_pos = _sprite.global_position
+		_trail_points.append(hammer_global_pos)
+
+		# Limit trail length
+		if _trail_points.size() > trail_length:
+			_trail_points.pop_front()
+
+		queue_redraw()
+	elif _trail_points.size() > 0:
+		# Fade out trail after attack
+		_trail_points.pop_front()
+		queue_redraw()
+
+func _draw() -> void:
+	if _trail_points.size() < 2:
+		return
+
+	# Draw trail with fading alpha
+	for i in range(_trail_points.size() - 1):
+		var alpha = float(i) / float(_trail_points.size())
+		var color = trail_color
+		color.a = trail_color.a * alpha
+
+		var thickness = 3.0 * alpha
+		var start = to_local(_trail_points[i])
+		var end = to_local(_trail_points[i + 1])
+
+		draw_line(start, end, color, thickness, true)

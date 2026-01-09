@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://fast_enemy"]
+[gd_scene load_steps=8 format=3 uid="uid://cx3e1vy2q7p6f"]
 
-[ext_resource type="Script" path="res://scenes/enemy/Enemy.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Sprites/black_ghost.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://b1aqpyyojq651" path="res://scenes/enemy/Enemy.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://cixv5kym18sej" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Ghost/Ghost Voice 003.wav" id="2_c2one"]
+[ext_resource type="AudioStream" uid="uid://ddvvkvt7wkk2w" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Ghost/Ghost Whispers 005.wav" id="2_nb8qu"]
+[ext_resource type="Texture2D" uid="uid://ckkea5appxcia" path="res://assets/enemies/Sprites/black_ghost.png" id="2_sprite"]
+[ext_resource type="AudioStream" uid="uid://b83815mcr4yp5" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Ghost/Ghost Attack 002.wav" id="3_o7epg"]
+[ext_resource type="AudioStream" uid="uid://cc5qlb2bhm6v4" path="res://assets/audio/sfx/Monsters & Creatures/Undead/Ghost/Ghost Attack 009.wav" id="4_gpo5x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fast"]
 radius = 40.0
@@ -12,6 +16,10 @@ collision_mask = 3
 script = ExtResource("1_script")
 move_speed = 240.0
 max_health = 15.0
+death_sound = ExtResource("2_nb8qu")
+hurt_sound = ExtResource("3_o7epg")
+attack_sound = ExtResource("4_gpo5x")
+idle_sound = ExtResource("2_c2one")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_sprite")

@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://slime_enemy"]
+[gd_scene load_steps=8 format=3 uid="uid://c3wneu0stvfcv"]
 
-[ext_resource type="Script" path="res://scenes/enemy/SlimeEnemy.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/enemies/Sprites/slime.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://bjry04s716nu6" path="res://scenes/enemy/SlimeEnemy.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b3exgtt0ofinc" path="res://assets/enemies/Sprites/slime.png" id="2_sprite"]
+[ext_resource type="AudioStream" uid="uid://cqxam3rc0nan7" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Mr. Froggy/Mr. Froggy Dislikes 007.wav" id="2_xrjbw"]
+[ext_resource type="AudioStream" uid="uid://llwo5eulrrf" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Mr. Froggy/Mr. Froggy Pain 007.wav" id="3_ae1jh"]
+[ext_resource type="AudioStream" uid="uid://ci4c3afb5i3jh" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Mr. Froggy/Mr. Froggy War Cry 003.wav" id="4_1g182"]
+[ext_resource type="AudioStream" uid="uid://dgu0ma8gkb0h" path="res://assets/audio/sfx/Monsters & Creatures/Cute/Mr. Froggy/Mr. Froggy Phrase 007.wav" id="5_x5sau"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_slime"]
 radius = 45.0
@@ -12,7 +16,10 @@ collision_mask = 3
 script = ExtResource("1_script")
 move_speed = 80.0
 max_health = 40.0
-damage = 15.0
+death_sound = ExtResource("2_xrjbw")
+hurt_sound = ExtResource("3_ae1jh")
+attack_sound = ExtResource("4_1g182")
+idle_sound = ExtResource("5_x5sau")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_sprite")
